@@ -25,7 +25,7 @@ export default function EnergyCard({ batteryPercentage, batteryAmperage }) {
         </div>
       </div>
 
-      {/* Battery */}
+      
       <div className="mb-4">
         <div className="flex items-baseline">
           <span className="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">

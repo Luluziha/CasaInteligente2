@@ -24,10 +24,10 @@ export default function LoginScreen({ onLogin }) {
     if (usuario === user.usuario && senha === user.senha) {
       setErro("");
 
-      // marca localStorage
+      
       localStorage.setItem("isAuthenticated", "true");
 
-      // atualiza estado global
+      
       onLogin();
 
       navigate("/dashboard");

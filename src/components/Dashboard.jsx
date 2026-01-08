@@ -61,7 +61,7 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
   return (
     <Arduino>
       <div className="p-4 md:p-8 relative min-h-screen">
-        {/* Header */}
+        
         <header className="mb-10 flex justify-between items-center gap-6">
           <div>
             <h1 className="flex items-center justify-center text-4xl font-bold bg-gradient-to-r from-purple-600 via-cyan-500 to-pink-500 bg-clip-text text-transparent">
@@ -125,7 +125,7 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
           )}
         </header>
 
-        {/* Birthday */}
+        
         {isBirthday && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur">
             <div className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-600 p-8 text-white shadow-2xl">
@@ -137,7 +137,7 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
           </div>
         )}
 
-        {/* Grid ou Painel Expandido */}
+        
         {!showLights && !showTemperature && !showWeather ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <TemperatureCard
@@ -149,7 +149,7 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
             <DateTimeCard />
             <EnergyCard batteryPercentage={batteryPercentage} batteryAmperage={batteryAmperage} />
 
-            {/* Card Iluminação */}
+            
             <div
               onClick={() => setShowLights(true)}
               className="cursor-pointer rounded-2xl bg-gradient-to-br from-amber-500 to-pink-500 p-6 text-white hover:scale-105 transition-all"

@@ -27,7 +27,7 @@ export default function LightsControl({ onBack, darkMode }) {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      {/* Header */}
+      
       <header className="mb-8">
         <button
           onClick={onBack}
@@ -45,7 +45,7 @@ export default function LightsControl({ onBack, darkMode }) {
         </p>
       </header>
 
-      {/* Lights Grid */}
+     
       <div className="space-y-8">
         {Object.entries(groupedLights).map(([room, roomLights]) => (
           <div key={room}>
@@ -102,7 +102,7 @@ export default function LightsControl({ onBack, darkMode }) {
                     {light.isOn ? 'Ligada' : 'Desligada'}
                   </p>
 
-                  {/* Brilho */}
+                  
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
                       <span className={light.isOn ? 'text-white/80' : 'text-slate-600 dark:text-slate-400'}>

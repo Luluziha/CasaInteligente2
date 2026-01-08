@@ -32,7 +32,7 @@ export default function Arduino({ onConnect, connection, children }) {
   return (
     <div className="min-h-screen relative">
       
-      {/* BOTÃO */}
+      
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={connectSerial}
@@ -48,7 +48,7 @@ export default function Arduino({ onConnect, connection, children }) {
         </button>
       </div>
 
-      {/* DASHBOARD */}
+      
       {children}
     </div>
   );

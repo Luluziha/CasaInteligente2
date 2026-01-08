@@ -20,7 +20,7 @@ export default function WeatherForecast({ onBack }) {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      {/* Header */}
+    
       <header className="mb-8 flex items-center gap-4">
         <button
           onClick={onBack}
@@ -35,7 +35,7 @@ export default function WeatherForecast({ onBack }) {
         </h1>
       </header>
 
-      {/* Grid de previsão */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {forecast.map((day, i) => (
           <div

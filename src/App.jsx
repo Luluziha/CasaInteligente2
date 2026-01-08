@@ -8,13 +8,13 @@ import { Dashboard } from "./components/Dashboard";
 import PerfilScreen from "./pages/PerfilScreen";
 
 export default function App() {
-  // Inicializa com valor do localStorage para persistência
+  
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("isAuthenticated") === "true"
   );
   const [darkMode, setDarkMode] = useState(true);
 
-  // Atualiza classe dark no <html> quando mudar darkMode
+  
   useEffect(() => {
     const root = document.documentElement;
     if (darkMode) root.classList.add("dark");

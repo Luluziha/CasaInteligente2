@@ -12,7 +12,7 @@ export default function TemperatureControl({ onBack, darkMode }) {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      {/* Header */}
+      
       <header className="mb-8 flex items-center gap-2">
         <button
           onClick={onBack}
@@ -27,7 +27,7 @@ export default function TemperatureControl({ onBack, darkMode }) {
         </h1>
       </header>
 
-      {/* Grid de cômodos */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {rooms.map((room, index) => (
           <div

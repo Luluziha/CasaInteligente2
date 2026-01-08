@@ -1,7 +1,7 @@
 import { Sun, Zap } from "lucide-react";
 
 export default function SolarCard({ power }) {
-  const maxPower = 5; // kW
+  const maxPower = 5; 
   const percentage = (power / maxPower) * 100;
 
   return (

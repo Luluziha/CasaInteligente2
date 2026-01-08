@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function PerfilScreen() {
   const navigate = useNavigate();
-  const fileInputRef = useRef(null); // Referência para o input de arquivo
+  const fileInputRef = useRef(null); 
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || {}
   );
-  const [senha, setSenha] = useState(""); // Nova senha
-  const [foto, setFoto] = useState(user.foto || ""); // Foto de perfil
+  const [senha, setSenha] = useState(""); 
+  const [foto, setFoto] = useState(user.foto || ""); 
 
   function handleSave(e) {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function PerfilScreen() {
   }
 
   function handleAlterarFoto() {
-    fileInputRef.current.click(); // Abre o seletor de arquivo
+    fileInputRef.current.click(); 
   }
 
   return (
@@ -45,7 +45,7 @@ export default function PerfilScreen() {
           Meu Perfil
         </h2>
 
-        {/* FOTO DE PERFIL */}
+       
         <div className="flex flex-col items-center mb-4">
           <img
             src={foto || "https://via.placeholder.com/100"}
@@ -64,11 +64,11 @@ export default function PerfilScreen() {
             accept="image/*"
             ref={fileInputRef}
             onChange={handleFotoChange}
-            className="hidden" // Input oculto
+            className="hidden" 
           />
         </div>
 
-        {/* NOME */}
+        
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Nome</label>
           <input
@@ -79,7 +79,7 @@ export default function PerfilScreen() {
           />
         </div>
 
-        {/* EMAIL */}
+        
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Email</label>
           <input
@@ -90,7 +90,7 @@ export default function PerfilScreen() {
           />
         </div>
 
-        {/* DATA DE NASCIMENTO */}
+      
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Data de Nascimento</label>
           <input
@@ -101,7 +101,7 @@ export default function PerfilScreen() {
           />
         </div>
 
-        {/* SENHA */}
+        
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Nova Senha</label>
           <input

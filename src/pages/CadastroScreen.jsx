@@ -118,7 +118,7 @@ export default function CadastroScreen() {
             className={inputClass}
           />
 
-          {/* BOTÃO ESTILIZADO PARA ESCOLHER FOTO */}
+          
           <label className="w-full">
             <span className="inline-block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded cursor-pointer">
               Escolher Foto
