@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, Lightbulb } from "lucide-react";
 
 import TemperatureCard from "./TemperatureCard";
+import TemperatureControl from "./TemperatureControl";
 import WeatherCard from "./WeatherCard";
 import WeatherForecast from "./WeatherForecast";
 import DateTimeCard from "./DateTimeCard";
@@ -18,44 +19,42 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
   const [greeting, setGreeting] = useState("Olá");
 
   const [temperature, setTemperature] = useState(23);
+  const [showTemperature, setShowTemperature] = useState(false);
   const [humidity, setHumidity] = useState(65);
   const [batteryPercentage, setBatteryPercentage] = useState(10);
   const [batteryAmperage, setBatteryAmperage] = useState(12.5);
 
   const user = JSON.parse(localStorage.getItem("user")) || {};
 
- useEffect(() => {
-  const interval = setInterval(() => {
-    setTemperature(v => v + (Math.random() - 0.5));
-    setHumidity(v => Math.max(40, Math.min(80, v + (Math.random() - 0.5))));
-    setBatteryPercentage(v => Math.max(20, Math.min(100, v + (Math.random() - 0.5))));
-    setBatteryAmperage(v => Math.max(0, Math.min(20, v + (Math.random() - 0.5))));
-  }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTemperature(v => v + (Math.random() - 0.5));
+      setHumidity(v => Math.max(40, Math.min(80, v + (Math.random() - 0.5))));
+      setBatteryPercentage(v => Math.max(20, Math.min(100, v + (Math.random() - 0.5))));
+      setBatteryAmperage(v => Math.max(0, Math.min(20, v + (Math.random() - 0.5))));
+    }, 3000);
 
-  const hour = new Date().getHours();
-  if (hour >= 5 && hour < 12) setGreeting("Bom dia");
-  else if (hour >= 12 && hour < 18) setGreeting("Boa tarde");
-  else setGreeting("Boa noite");
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) setGreeting("Bom dia");
+    else if (hour >= 12 && hour < 18) setGreeting("Boa tarde");
+    else setGreeting("Boa noite");
 
-  if (user?.nascimento) {
-    const today = new Date();
-    const birth = new Date(user.nascimento);
+    if (user?.nascimento) {
+      const today = new Date();
+      const birth = new Date(user.nascimento);
 
-    
-    const birthDay = birth.getUTCDate();
-    const birthMonth = birth.getUTCMonth();
-    const todayDay = today.getUTCDate();
-    const todayMonth = today.getUTCMonth();
+      const birthDay = birth.getUTCDate();
+      const birthMonth = birth.getUTCMonth();
+      const todayDay = today.getUTCDate();
+      const todayMonth = today.getUTCMonth();
 
-    if (birthDay === todayDay && birthMonth === todayMonth) {
-      setIsBirthday(true);
+      if (birthDay === todayDay && birthMonth === todayMonth) {
+        setIsBirthday(true);
+      }
     }
-  }
 
-  return () => clearInterval(interval);
-}, []);
-
-  
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Arduino>
@@ -73,12 +72,26 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
           </div>
 
           <div className="flex items-center gap-4">
-            <button onClick={onToggleDarkMode} className="relative p-3 rounded-xl bg-white/70 dark:bg-slate-700/60 backdrop-blur-sm border border-slate-200 dark:border-slate-600 shadow-md hover:scale-105 transition-all duration-300">
-              <span className={`${darkMode ? "opacity-100" : "opacity-0"} absolute inset-0 flex items-center justify-center`}>
+            <button
+              onClick={onToggleDarkMode}
+              className="relative p-3 rounded-xl bg-white/70 dark:bg-slate-700/60 backdrop-blur-sm border border-slate-200 dark:border-slate-600 shadow-md hover:scale-105 transition-all duration-300"
+            >
+              <span
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-500
+      ${darkMode ? "rotate-0 opacity-100" : "rotate-180 opacity-0"}`}
+              >
                 <Sun className="w-6 h-6 text-yellow-400 drop-shadow-md" />
               </span>
-              <span className={`${!darkMode ? "opacity-100" : "opacity-0"} absolute inset-0 flex items-center justify-center`}>
+
+              <span
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-500
+      ${!darkMode ? "rotate-0 opacity-100" : "-rotate-180 opacity-0"}`}
+              >
                 <Moon className="w-6 h-6 text-indigo-500 drop-shadow-md" />
+              </span>
+
+              <span className="opacity-0">
+                <Sun className="w-6 h-6" />
               </span>
             </button>
 
@@ -117,9 +130,13 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
         )}
 
         {/* Grid ou Painel Expandido */}
-        {!showLights && !showWeather ? (
+        {!showLights && !showTemperature && !showWeather ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <TemperatureCard temperature={temperature} humidity={humidity} />
+            <TemperatureCard
+              temperature={temperature}
+              humidity={humidity}
+              onClick={() => setShowTemperature(true)}
+            />
             <WeatherCard onClick={() => setShowWeather(true)} />
             <DateTimeCard />
             <EnergyCard batteryPercentage={batteryPercentage} batteryAmperage={batteryAmperage} />
@@ -138,9 +155,11 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
           </div>
         ) : showLights ? (
           <LightsControl onBack={() => setShowLights(false)} />
-        ) : (
+        ) : showTemperature ? (
+          <TemperatureControl onBack={() => setShowTemperature(false)} />
+        ) : showWeather ? (
           <WeatherForecast onBack={() => setShowWeather(false)} />
-        )}
+        ) : null}
       </div>
     </Arduino>
   );

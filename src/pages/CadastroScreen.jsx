@@ -152,7 +152,7 @@ export default function CadastroScreen() {
 
           <button
             type="submit"
-            className="h-11 mt-3 border border-white rounded-md text-white font-semibold hover:bg-white hover:text-purple-700 transition"
+            className="mt-4 h-11 border border-white rounded-md text-white font-semibold hover:bg-white hover:text-purple-600 transition shadow-lg shadow-cyan-500/50"
           >
             Cadastrar
           </button>

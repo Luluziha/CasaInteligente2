@@ -1,8 +1,11 @@
 import { Thermometer, Droplets } from "lucide-react";
 
-export default function TemperatureCard({ temperature, humidity }) {
+export default function TemperatureCard({ temperature, humidity, onClick }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm p-6 shadow-xl border border-purple-200/50 dark:border-purple-800/50 hover:scale-105 transition-all duration-300 hover:shadow-purple-500/20">
+    <div
+      onClick={onClick}
+      className="relative overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm p-6 shadow-xl border border-purple-200/50 dark:border-purple-800/50 hover:scale-105 transition-all duration-300 hover:shadow-purple-500/20 cursor-pointer"
+    >
       <div className="flex items-center justify-between mb-4">
         <Thermometer className="w-8 h-8 text-purple-600 dark:text-purple-400" />
         <div className="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/50">

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function PerfilScreen() {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null); // Referência para o input de arquivo
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || {}
   );
@@ -11,7 +13,6 @@ export default function PerfilScreen() {
 
   function handleSave(e) {
     e.preventDefault();
-    // Atualiza objeto user
     const updatedUser = { ...user, senha, foto };
     localStorage.setItem("user", JSON.stringify(updatedUser));
     alert("Dados atualizados com sucesso!");
@@ -25,6 +26,10 @@ export default function PerfilScreen() {
       reader.onload = () => setFoto(reader.result);
       reader.readAsDataURL(file);
     }
+  }
+
+  function handleAlterarFoto() {
+    fileInputRef.current.click(); // Abre o seletor de arquivo
   }
 
   return (
@@ -47,11 +52,19 @@ export default function PerfilScreen() {
             alt="Foto de perfil"
             className="w-24 h-24 rounded-full mb-2 object-cover border"
           />
+          <button
+            type="button"
+            onClick={handleAlterarFoto}
+            className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
+          >
+            Alterar Foto
+          </button>
           <input
             type="file"
             accept="image/*"
+            ref={fileInputRef}
             onChange={handleFotoChange}
-            className="text-sm text-gray-600"
+            className="hidden" // Input oculto
           />
         </div>
 
@@ -84,9 +97,7 @@ export default function PerfilScreen() {
             type="date"
             className="w-full mb-2 p-2 border rounded text-black placeholder-gray-500"
             value={user.nascimento || ""}
-            onChange={(e) =>
-              setUser({ ...user, nascimento: e.target.value })
-            }
+            onChange={(e) => setUser({ ...user, nascimento: e.target.value })}
           />
         </div>
 
