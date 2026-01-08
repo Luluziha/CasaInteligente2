@@ -10,6 +10,8 @@ import EnergyCard from "./EnergyCard";
 import LightsControl from "./LightsControl";
 import Arduino from "./Arduino";
 import ProfileCard from "./ProfileCard";
+import CasaIcon from "../assets/casa-inteligente (1).png";
+
 
 export function Dashboard({ darkMode, onToggleDarkMode }) {
   const [showLights, setShowLights] = useState(false);
@@ -62,9 +64,15 @@ export function Dashboard({ darkMode, onToggleDarkMode }) {
         {/* Header */}
         <header className="mb-10 flex justify-between items-center gap-6">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-cyan-500 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="flex items-center justify-center text-4xl font-bold bg-gradient-to-r from-purple-600 via-cyan-500 to-pink-500 bg-clip-text text-transparent">
+              <img
+                src={CasaIcon}
+                alt="Casa Inteligente"
+                className="w-10 h-10 mr-4 opacity-75 invert"
+              />
               Smart Home
             </h1>
+
             <p className="mt-3 text-sm tracking-wide text-slate-500">Central de Controle</p>
             <h2 className="mt-4 text-2xl font-bold bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent">
               {greeting}, {user?.nome || "Usuário"} 👋
