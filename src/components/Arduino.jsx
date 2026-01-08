@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-export default function Arduino({ onConnect, connection }) {
+export default function Arduino({ onConnect, connection, children }) {
   const [loading, setLoading] = useState(false);
 
   const connectSerial = async () => {
     if (connection) return;
-    
+
     setLoading(true);
     try {
       const port = await navigator.serial.requestPort();
-      
       await port.open({ baudRate: 9600 });
 
       const textEncoder = new TextEncoderStream();
@@ -21,8 +20,8 @@ export default function Arduino({ onConnect, connection }) {
       const reader = textDecoder.readable.getReader();
 
       console.log("✅ Conectado ao Arduino!");
-      onConnect({ port, reader, writer });
-      
+      onConnect?.({ port, reader, writer });
+
     } catch (err) {
       console.error("Erro ao conectar:", err);
     } finally {
@@ -31,33 +30,26 @@ export default function Arduino({ onConnect, connection }) {
   };
 
   return (
-    <button
-      onClick={connectSerial}
-      disabled={loading || connection}
-      style={{
-        padding: "10px 20px",
-        borderRadius: "6px",
-        backgroundColor: connection ? "#28a745" : loading ? "#ccc" : "#0c9bf5",
-        color: "white",
-        border: "none",
-        cursor: connection ? "default" : loading ? "not-allowed" : "pointer",
-        fontSize: "16px",
-        fontWeight: "bold",
-        transition: "background-color 0.3s ease",
-        opacity: loading ? 0.7 : 1,
-      }}
-      onMouseOver={(e) => {
-        if (!connection && !loading) {
-          e.currentTarget.style.backgroundColor = "#087dc2";
-        }
-      }}
-      onMouseOut={(e) => {
-        if (!connection && !loading) {
-          e.currentTarget.style.backgroundColor = "#0c9bf5";
-        }
-      }}
-    >
-      {connection ? "🔌 Conectado" : loading ? "🔄 Conectando..." : "🔌 Conectar Arduino"}
-    </button>
+    <div className="min-h-screen relative">
+      
+      {/* BOTÃO */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={connectSerial}
+          disabled={loading || connection}
+          className={`px-5 py-3 rounded-lg font-bold text-white shadow-lg transition
+            ${connection ? "bg-green-600" : loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"}`}
+        >
+          {connection
+            ? "🔌 Conectado"
+            : loading
+            ? "🔄 Conectando..."
+            : "🔌 Conectar Arduino"}
+        </button>
+      </div>
+
+      {/* DASHBOARD */}
+      {children}
+    </div>
   );
 }

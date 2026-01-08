@@ -1,6 +1,6 @@
 import { CloudSun, Wind } from "lucide-react";
 
-export default function WeatherCard() {
+export default function WeatherCard({ onClick }) {
   const weather = {
     condition: "Parcialmente nublado",
     temperature: 25,
@@ -8,7 +8,10 @@ export default function WeatherCard() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm p-6 shadow-xl border border-cyan-200/50 dark:border-cyan-800/50 hover:scale-105 transition-all duration-300 hover:shadow-cyan-500/20">
+    <div
+      onClick={onClick}
+      className="relative cursor-pointer overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm p-6 shadow-xl border border-cyan-200/50 dark:border-cyan-800/50 hover:scale-105 transition-all duration-300 hover:shadow-cyan-500/20"
+    >
       <div className="flex items-center justify-between mb-4">
         <CloudSun className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
         <div className="px-3 py-1 rounded-full bg-cyan-100 dark:bg-cyan-900/50">
